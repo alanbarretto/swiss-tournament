@@ -1,10 +1,10 @@
-#Udacity FSND Project 2: Swiss Pairing Tournament
+# Udacity FSND Project 2: Swiss Pairing Tournament
 
 This is the second major project in Udacity's Full Stack Nanodegree Course which features lessons in psql and python.The aim is to create a database that keeps track of players, matches in a game tournament. A Swiss tournament system has a pairing system where players are not eliminated.  Everyone gets to play in each round, and players with the same or close to the same record (number of wins) are paired against each other to ensure competitiveness. 
 
 ---
 
-##Getting Started
+## Getting Started
 
 To run the SQL database server, you'll use a virtual machine (VM) which is a Linux system server that runs on top of your own machine. You can fork and clone the VM configuration from the repository 
 
@@ -17,7 +17,7 @@ Windows users: The Installer may ask you to grant network permissions to Vagrant
 
 ---
 
-##How to Use
+## How to Use
 
 Using the terminal, cd to the directory containing the VM files.  Then, cd to the vagrant subdirectory.  From there, run the command 'vagrant up'.  This will cause Vagrant to download the Linux operating system and install it. This may take quite a while (many minutes) depending on how fast your Internet connection is.
 
@@ -36,7 +36,7 @@ Then, run the test by typing python tournament_test.py
 ---
 
 
-##Expected Outcome
+## Expected Outcome
 
 All the functions in the tournament.py are tested by the tournament_test.py.  If everything passes, the terminal will display the following:
 
