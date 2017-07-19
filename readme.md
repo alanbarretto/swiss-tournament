@@ -6,7 +6,7 @@ This is the second major project in Udacity's Full Stack Nanodegree Course which
 
 ## Getting Started
 
-To run the SQL database server, you'll use a virtual machine (VM) which is a Linux system server that runs on top of your own machine. You can fork and clone the VM configuration from the repository 
+To run the SQL database server, you'll use a virtual machine (VM) which is a Linux system server that runs on top of your own machine. You can fork and clone the VM configuration from the repository https://github.com/alanbarretto/swiss-tournament/tree/master/FSND-Virtual-Machine
 
 Next, you will have to download Virtual Box from this link https://www.virtualbox.org/wiki/Downloads.  Virtual Box is the software the runs the virtual machine (VM). 
 Ubuntu users: If you are running Ubuntu 14.04, install VirtualBox using the Ubuntu Software Center instead. Due to a reported bug, installing VirtualBox from the site may uninstall other software you need.
