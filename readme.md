@@ -19,19 +19,19 @@ Windows users: The Installer may ask you to grant network permissions to Vagrant
 
 ## How to Use
 
-Using the terminal, cd to the directory containing the VM files.  Then, cd to the vagrant subdirectory.  From there, run the command 'vagrant up'.  This will cause Vagrant to download the Linux operating system and install it. This may take quite a while (many minutes) depending on how fast your Internet connection is.
+Using the terminal, cd to the directory containing the VM files.  Then, cd to the vagrant subdirectory.  From there, run the command `vagrant up`.  This will cause Vagrant to download the Linux operating system and install it. This may take quite a while (many minutes) depending on how fast your Internet connection is.
 
-When it is done, you will get your shell prompt back.  This time, type 'vagrant ssh' to log in to your newly installed Linux VM!
+When it is done, you will get your shell prompt back.  This time, type `vagrant ssh` to log in to your newly installed Linux VM!
 
-Once you get vagrant up, you need to navigate to the tournament directory by typing cd /vagrant/tournament
+Once you get vagrant up, you need to navigate to the tournament directory by typing `cd /vagrant/tournament`
 
-##Running the Tournament
+## Running the Tournament
 
-Type psql tournament on the command line.  Then type \i tournament.sql to run the scripts in that file and create the tables.  
+Type `psql tournament` on the command line.  Then type `\i tournament.sql` to run the scripts in that file and create the tables.  
 
-Exit the psql server by typing \q
+Exit the psql server by typing `\q`
 
-Then, run the test by typing python tournament_test.py
+Then, run the test by typing `python tournament_test.py`
 
 ---
 
@@ -50,4 +50,5 @@ All the functions in the tournament.py are tested by the tournament_test.py.  If
 8. After match deletion, player standings are properly reset.
 9. Matches are properly deleted.
 10. After one match, players with one win are properly paired.
-Success! All tests pass!
+
+- Success! All tests pass!
