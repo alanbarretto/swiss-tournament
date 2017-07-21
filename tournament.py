@@ -127,7 +127,6 @@ def swissPairings():
         matches desc) as standings;")
     
     number_matches = cursor.fetchall()    
-
     pairing_list = []
 
     """Since the touples are already ordered, take the touples two at a time from the 
@@ -137,12 +136,10 @@ def swissPairings():
     """
    
     for n in range(0, len(number_matches), 2):
-    
         pairing_list.append((number_matches[n][0], \
             number_matches[n][1], number_matches[n+1][0], number_matches[n+1][1]))
     
     return pairing_list
-
     db.close()
 
   
