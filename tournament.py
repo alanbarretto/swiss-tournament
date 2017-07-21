@@ -73,8 +73,8 @@ def playerStandings():
     descending."""
 
     cursor.execute("SELECT players.id, players.name, Count(matches.winner) as \
-        wins, (Case When match_count.matches is null then 0 Else match_count.matches \
-        End) as matches from registered_players players left join matches on \
+        wins, (Case When match_count.total_matches is null then 0 Else match_count.total_matches \
+        End) as matches_played from registered_players players left join matches on \
         players.id = matches.id1 left join match_count on players.id = match_count.id \
         group by 1, 2, 4 order by wins desc;")
     
@@ -120,11 +120,11 @@ def swissPairings():
     player id and name from that table.
     """
     cursor.execute("SELECT id, name from (SELECT players.id, players.name, \
-        Count(matches.winner) as wins, (Case when match_count.matches is null \
-        then 0 Else match_count.matches End) as matches from registered_players \
+        Count(matches.winner) as wins, (Case when match_count.total_matches is null \
+        then 0 Else match_count.total_matches End) as matches_played from registered_players \
         players left join matches on players.id = matches.id1 left join match_count \
         on players.id = match_count.id group by 1, 2, 4 order by wins desc, \
-        matches desc) as standings;")
+        matches_played desc) as standings;")
     
     number_matches = cursor.fetchall()    
     pairing_list = []
