@@ -23,7 +23,7 @@ After that, you need to download Vagrant, which is the software that configures 
 
 ## How to Use
 
-Using the terminal, cd to the directory containing the VM files.  Then, cd to the vagrant subdirectory.  From there, run the command `vagrant up`.  This will cause Vagrant to download the Linux operating system and install it. This may take quite a while (many minutes) depending on how fast your Internet connection is.
+Using the terminal, change directory to the folder containing the VM files.  Then, change directory to the vagrant subdirectory.  From there, run the command `vagrant up`.  This will cause Vagrant to download the Linux operating system and install it. This may take quite a while (many minutes) depending on how fast your Internet connection is.
 
 When it is done, you will get your shell prompt back.  This time, type `vagrant ssh` to log in to your newly installed Linux VM!
 
