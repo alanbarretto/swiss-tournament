@@ -4,8 +4,6 @@
 #
 
 import psycopg2
-import random
-
 
 def connect():
     """Connect to the PostgreSQL database.  Returns a database connection."""
@@ -40,10 +38,7 @@ def countPlayers():
 
 def registerPlayer(player):
     """Adds a player to the tournament database.
-  
-    The database assigns a unique serial id number for the player.  (This
-    should be handled by your SQL database schema, not in your Python code.)
-  
+    
     Args:
       name: the player's full name (need not be unique).
     """
@@ -73,7 +68,7 @@ def playerStandings():
     db = connect()
     cursor = db.cursor()
 
-    """This query will first join the registered_players table, the matches table, and the 
+    """Join the registered_players table and matches table first, then join it with the 
     match_count view to create the player standings table ordered by wins and matches 
     descending."""
 
@@ -83,9 +78,9 @@ def playerStandings():
         players.id = matches.id1 left join match_count on players.id = match_count.id \
         group by 1, 2, 4 order by wins desc;")
     
-    report = cursor.fetchall()
+    standings_report = cursor.fetchall()
     db.close()
-    return report
+    return standings_report
 
 def reportMatch(winner, loser):
     """Records the outcome of a single match between two players.
@@ -121,11 +116,8 @@ def swissPairings():
     db = connect()
     cursor = db.cursor()
 
-    """This query will first join the registered_players table, the matches table, and the 
-    match_count view to create the player standings table ordered by wins and matches 
-    descending.  This is necessary to determine the order or rank of each player.
-    From there, it selects only the id and player name into a new relation which will
-    be used to create the touple.
+    """Use the same query for creating the player standings table, then query only the 
+    player id and name from that table.
     """
     cursor.execute("SELECT id, name from (SELECT players.id, players.name, \
         Count(matches.winner) as wins, (Case when match_count.matches is null \
@@ -135,24 +127,19 @@ def swissPairings():
         matches desc) as standings;")
     
     number_matches = cursor.fetchall()    
-
     pairing_list = []
 
-    """Loop through the List of touples, skipping every other.  Join each pair 
-    into one touple and append it into the empty pairing_list array. Pairing list should
-    have the first two touples from number_matches joined into a single touple and 
-    appended as its first element.  The next two touples from pairing_list are then 
-    joined and appended, and so on. 
+    """Since the touples are already ordered, take the touples two at a time from the 
+    start of the list, group them into a single touple, then append into the empty 
+    pairing_list. 
 
     """
    
     for n in range(0, len(number_matches), 2):
-    
         pairing_list.append((number_matches[n][0], \
             number_matches[n][1], number_matches[n+1][0], number_matches[n+1][1]))
     
     return pairing_list
-
     db.close()
 
   
