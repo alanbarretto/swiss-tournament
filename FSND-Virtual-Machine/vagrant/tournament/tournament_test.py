@@ -42,8 +42,8 @@ def testCount():
     if c != 0:
         raise ValueError(
             "After deletion, countPlayers should return zero.")
-    print "4. countPlayers() returns zero after registered players are deleted.\
-           5. Player records successfully deleted."
+    print "4. countPlayers() returns zero after registered players are deleted."
+    print "5. Player records successfully deleted."
 
 def testStandingsBeforeMatches():
     """

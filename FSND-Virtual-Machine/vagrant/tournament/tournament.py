@@ -67,16 +67,7 @@ def playerStandings():
     """
     db = connect()
     cursor = db.cursor()
-
-    """Join the registered_players table and matches table first, then join it with the 
-    match_count view to create the player standings table ordered by wins and matches 
-    descending."""
-
-    cursor.execute("SELECT players.id, players.name, Count(matches.winner) as \
-        wins, (Case When match_count.total_matches is null then 0 Else match_count.total_matches \
-        End) as matches_played from registered_players players left join matches on \
-        players.id = matches.id1 left join match_count on players.id = match_count.id \
-        group by 1, 2, 4 order by wins desc;")
+    cursor.execute("SELECT * from standings;")
     
     standings_report = cursor.fetchall()
     db.close()
@@ -97,8 +88,8 @@ def reportMatch(winner, loser):
     winner_name = cursor.fetchone()
     player_lose = cursor.execute(lose_sql, (loser,))
     loser_name = cursor.fetchone()
-    report_sql = "Insert into matches Values ((%s), (%s), (%s), (%s));"
-    report_match = cursor.execute(report_sql, (winner, winner_name, loser, loser_name))
+    report_sql = "Insert into matches (winner_id, loser_id) Values ((%s), (%s));"
+    report_match = cursor.execute(report_sql, (winner, loser))
     db.commit()
     db.close()
     
@@ -113,25 +104,13 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    db = connect()
-    cursor = db.cursor()
-
-    """Use the same query for creating the player standings table, then query only the 
-    player id and name from that table.
-    """
-    cursor.execute("SELECT id, name from (SELECT players.id, players.name, \
-        Count(matches.winner) as wins, (Case when match_count.total_matches is null \
-        then 0 Else match_count.total_matches End) as matches_played from registered_players \
-        players left join matches on players.id = matches.id1 left join match_count \
-        on players.id = match_count.id group by 1, 2, 4 order by wins desc, \
-        matches_played desc) as standings;")
-    
-    number_matches = cursor.fetchall()    
+   
+    number_matches = playerStandings()    
     pairing_list = []
 
     """Since the touples are already ordered, take the touples two at a time from the 
-    start of the list, group them into a single touple, then append into the empty 
-    pairing_list. 
+    start of the list, take only the first two elements in each, group them into a single 
+    touple, then append into the empty pairing_list. 
 
     """
    
